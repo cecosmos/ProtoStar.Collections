@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
+using Xunit.Sdk;
 
 namespace ProtoStar.Collections.Tests
 {
@@ -110,8 +111,8 @@ namespace ProtoStar.Collections.Tests
         {
             IList<int> baseCollection =  System.Linq.Enumerable.Range(0,10).ToList();        
             var col = new CollectionAdapter<int>(()=>baseCollection,baseCollection.Add,baseCollection.Remove);
-            Assert.True(col.Contains(3));
-            Assert.False(col.Contains(10));
+            Assert.Contains(3,col);
+            Assert.Throws<ContainsException>(()=> Assert.Contains(10,col));
         }
     }
 }
