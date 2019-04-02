@@ -8,7 +8,7 @@ jobs:
     executor: dotnetcoreexecutor
     steps:
       - checkout
-      - run: dotnet build Source/ProtoStar.Collections.csproj
+      - run: dotnet build Source/Source.csproj
   test:
     executor: dotnetcoreexecutor
     steps:
@@ -22,7 +22,7 @@ jobs:
           dotnet test 
           /p:CollectCoverage=true 
           /p:Include=[ProtoStar.Collections]*
-          /p:Threshold=80
+          /p:Threshold=20
   deploy:
     executor: dotnetcoreexecutor
     steps:
