@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Source\Source.csproj" />
+    <ProjectReference Include="..\Source\ProtoStar.Collections.csproj" />
   </ItemGroup>
 
 </Project>

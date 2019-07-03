@@ -9,7 +9,6 @@ using System.Collections;
 
 namespace ProtoStar.Collections
 {
-    [ExcludeFromCodeCoverage]
     public class Group<TKey, TValue> :
         IGrouping<TKey, TValue>
     {

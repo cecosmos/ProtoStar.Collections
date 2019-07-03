@@ -35,16 +35,11 @@ namespace ProtoStar.Collections
             }
         }
 
-        [ExcludeFromCodeCoverage]
         public static IReadOnlyCollection<T> AsReadOnlyCollection<T>(this IEnumerable<T> source)
         {
             if (source == null) throw new ArgumentNullException("source");
             return source as IReadOnlyCollection<T> ?? new CollectionAdapter<T>(()=>source);
         }
-
-        [ExcludeFromCodeCoverage]
-        public static IEnumerable<T> TakeUntil<T>(this IEnumerable<T> source, System.Predicate<T> predicate, bool inclusive) =>
-            source.TakeWhile(item => !predicate(item), inclusive);
 
         public static NormalizedDictionary<TOut> ToNormalizedDictionary<TIn,TOut>(
             this IEnumerable<TIn> source,

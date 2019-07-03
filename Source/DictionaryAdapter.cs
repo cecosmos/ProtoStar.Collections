@@ -7,7 +7,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics.CodeAnalysis;
-using ProtoStar.Core;
 
 namespace ProtoStar.Collections
 {
@@ -15,27 +14,27 @@ namespace ProtoStar.Collections
         IDictionary<TKey, TValue>,
         IReadOnlyDictionary<TKey,TValue>
     {
-        private readonly ProtoStar.Core.TryFunc<TKey, TValue> GetCallback;
+        private readonly TryFunc<TKey, TValue> GetCallback;
         private readonly Action<TKey, TValue> AddOrSetCallback;
         private readonly Predicate<TKey> RemoveCallback;
         private readonly Func<IEnumerable<TKey>> KeyEnumerable;
 
         public DictionaryAdapter(
-            ProtoStar.Core.TryFunc<TKey, TValue> getCallback,
+            TryFunc<TKey, TValue> getCallback,
             Func<IEnumerable<TKey>> keyEnumerable,
             Action<TKey, TValue> addOrSetCallback,
             Predicate<TKey> removeCallback)
         {
-            GetCallback = getCallback;
-            AddOrSetCallback = addOrSetCallback;
-            RemoveCallback = removeCallback;
-            KeyEnumerable = keyEnumerable;
+            this.GetCallback = getCallback;
+            this.AddOrSetCallback = addOrSetCallback;
+            this.RemoveCallback = removeCallback;
+            this.KeyEnumerable = keyEnumerable;
         }
 
-        public DictionaryAdapter(ProtoStar.Core.TryFunc<TKey,TValue> getCallback,Func<IEnumerable<TKey>> keyEnumerable)
+        public DictionaryAdapter(TryFunc<TKey,TValue> getCallback,Func<IEnumerable<TKey>> keyEnumerable)
         {
-            GetCallback = getCallback;
-            KeyEnumerable = keyEnumerable;
+            this.GetCallback = getCallback;
+            this.KeyEnumerable = keyEnumerable;
         }
 
         public TValue this[TKey key]
@@ -57,16 +56,12 @@ namespace ProtoStar.Collections
 
         public bool IsReadOnly => AddOrSetCallback==null;
 
-        [ExcludeFromCodeCoverage]
         IEnumerable<TKey> IReadOnlyDictionary<TKey, TValue>.Keys => Keys;
 
-        [ExcludeFromCodeCoverage]
         IEnumerable<TValue> IReadOnlyDictionary<TKey, TValue>.Values => Values;
 
-        [ExcludeFromCodeCoverage]
         int IReadOnlyCollection<KeyValuePair<TKey, TValue>>.Count => Count;
 
-        [ExcludeFromCodeCoverage]
         TValue IReadOnlyDictionary<TKey, TValue>.this[TKey key] => this[key];
 
         public void Add(TKey key, TValue value)
@@ -90,7 +85,6 @@ namespace ProtoStar.Collections
         public bool ContainsKey(TKey key) => 
             GetCallback(key, out var value);
 
-        [ExcludeFromCodeCoverage]
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)=>
             this.AsEnumerable().Select((kv, i) => { array[i + arrayIndex] = kv; return kv; }).ToList();
 
