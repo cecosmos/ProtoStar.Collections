@@ -4,7 +4,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>ProtoStar.Collections</AssemblyName>
     <PackageId>ProtoStar.Collections</PackageId>
-    <Version>1.0.0-alpha</Version>
     <Company>ceCosmos</Company>
     <Authors>Johni.Michels</Authors>
     <RepositoryUrl>https://github.com/cecosmos/ProtoStar.Collections</RepositoryUrl>
@@ -13,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="GitVersion" Version="3.6.5" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
