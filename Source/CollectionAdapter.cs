@@ -14,7 +14,6 @@ namespace ProtoStar.Collections
         ICollection<T>, 
         IReadOnlyCollection<T>
     {
-        #region Public Constructors
 
         public CollectionAdapter(Func<IEnumerable<T>> iterator, Action<T> addCallback, Predicate<T> removeCallback)
         {
@@ -25,27 +24,17 @@ namespace ProtoStar.Collections
 
         public CollectionAdapter(Func<IEnumerable<T>> iterator)
         {
-            Iterator = iterator;
+            this.Iterator = iterator;
         }
 
-        #endregion Public Constructors
-
-        #region Private Properties
 
         private Action<T> AddCallback { get; set; }
         private Func<IEnumerable<T>> Iterator { get; set; }
         private Predicate<T> RemoveCallback { get; set; }
 
-        #endregion Private Properties
-
-        #region Public Properties
-
         public bool IsReadOnly => AddCallback==null;
-        public int Count => Iterator().Count();
+        public int Count => this.Iterator().Count();
 
-        #endregion Public Properties
-
-        #region Public Methods
 
         public void Add(T item)
         {
@@ -60,17 +49,15 @@ namespace ProtoStar.Collections
             }
         }
 
-        public bool Contains(T item) => Iterator().Contains(item);
+        public bool Contains(T item) => this.Iterator().Contains(item);
 
-        [ExcludeFromCodeCoverage]
-        public void CopyTo(T[] array, int arrayIndex) => Iterator().ToList().CopyTo(array, arrayIndex);
+        public void CopyTo(T[] array, int arrayIndex) => this.Iterator().ToList().CopyTo(array, arrayIndex);
 
-        public IEnumerator<T> GetEnumerator() => Iterator().GetEnumerator();
+        public IEnumerator<T> GetEnumerator() => this.Iterator().GetEnumerator();
 
-        public bool Remove(T item) => RemoveCallback(item);
+        public bool Remove(T item) => this.RemoveCallback(item);
 
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 
-        #endregion Public Methods
     }
 }
