@@ -29,7 +29,7 @@ jobs:
       - checkout
       - run: >
           dotnet pack
-          Source/Source.csproj
+          Source/ProtoStar.Collections.csproj
           -c Release
           --include-source
           --include-symbols
