@@ -32,8 +32,22 @@ namespace ProtoStar.Collections
         private Func<IEnumerable<T>> Iterator { get; set; }
         private Predicate<T> RemoveCallback { get; set; }
 
-        public bool IsReadOnly => AddCallback==null;
-        public int Count => this.Iterator().Count();
+        public bool IsReadOnly => (AddCallback==null) && (RemoveCallback==null);
+        public int Count 
+        {
+            get 
+            {
+                switch (this.Iterator())
+                {
+                    case ICollection<T> collection:
+                        return collection.Count;
+                    case IReadOnlyCollection<T> collection:
+                        return collection.Count;                    
+                    default:
+                        return this.Iterator().Count(); 
+                }
+            }
+        };
 
 
         public void Add(T item)
