@@ -47,7 +47,7 @@ namespace ProtoStar.Collections
                         return this.Iterator().Count(); 
                 }
             }
-        };
+        }
 
 
         public void Add(T item)
