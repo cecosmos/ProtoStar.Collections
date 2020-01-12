@@ -7,15 +7,16 @@ namespace ProtoStar.Collections
 {
     public static class CollectionExtensions
     {
-        #region Public Methods
-
         public static bool TryFind<T>(this IEnumerable<T> source, System.Predicate<T> predicate, out T match)
         {
             foreach (T item in source) { if (predicate(item)) { match = item; return true; } }
             match = default(T); return false;
         }
 
-        public static IEnumerable<T> Interleave<T>(this IEnumerable<T> source, IEnumerable<T> second) =>
+        public static IEnumerable<T> Interleave<T>(
+            this IEnumerable<T> source, 
+            IEnumerable<T> second
+        ) =>
             source.Zip(second, (l, r) => new[] { l, r }).SelectMany(x => x);
 
         public static IEnumerable<T> TakeWhile<T>(this IEnumerable<T> source, System.Predicate<T> predicate, bool inclusive)
@@ -48,9 +49,18 @@ namespace ProtoStar.Collections
         }
 
         public static IReadOnlyDictionary<T, double> ToNormalizedDictionary<T>(
-            this IEnumerable<KeyValuePair<T,double>> source)=>
-            source.ToNormalizedDictionary(kv=> kv.Key,kv=>kv.Value);        
+            this IEnumerable<KeyValuePair<T,double>> source
+        ) =>
+            source.ToNormalizedDictionary(kv=> kv.Key,kv=>kv.Value);   
 
-        #endregion Public Methods
+        public static IEnumerable<double> ToNormalized(
+            this IEnumerable<double> source
+        )
+        {
+            var valueSum = source.Sum();
+            return source.Select(value => value/valueSum);
+        }
+
+
     }
 }
