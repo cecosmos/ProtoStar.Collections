@@ -5,6 +5,7 @@ on:
     paths:
       - "*.cs"
       - "*.csproj"
+      - ".github/workflows/ContinuousIntegration.yml"
 
 jobs:
   SourceCompilation:
