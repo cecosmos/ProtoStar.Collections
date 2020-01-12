@@ -37,20 +37,17 @@ namespace ProtoStar.Collections
             return source as IReadOnlyCollection<T> ?? new CollectionAdapter<T>(()=>source);
         }
 
-        public static NormalizedDictionary<TOut> ToNormalizedDictionary<TIn,TOut>(
+        public static IReadOnlyDictionary<TOut, double> ToNormalizedDictionary<TIn,TOut>(
             this IEnumerable<TIn> source,
             Func<TIn,TOut> keySelector,
             Func<TIn,double> valueSelector)
         {
-            var result = new NormalizedDictionary<TOut>();
-            foreach(var item in source)
-            {
-                result.Add(keySelector(item), valueSelector(item));
-            }
-            return result;
+            var dict = source.ToDictionary(keySelector,valueSelector);
+            var valueSum = dict.Values.Sum();
+            return dict.ToDictionary(keyValue => keyValue.Key, keyValue => keyValue.Value/valueSum);
         }
 
-        public static NormalizedDictionary<T> ToNormalizedDictionary<T>(
+        public static IReadOnlyDictionary<T, double> ToNormalizedDictionary<T>(
             this IEnumerable<KeyValuePair<T,double>> source)=>
             source.ToNormalizedDictionary(kv=> kv.Key,kv=>kv.Value);        
 
