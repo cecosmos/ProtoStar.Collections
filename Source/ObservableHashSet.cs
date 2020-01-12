@@ -1,8 +1,4 @@
-﻿// Copyright © 2018 ceCosmos, Brazil. All rights reserved.
-// Project: ProtoStar
-// Author: Johni Michels
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;

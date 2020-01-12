@@ -1,8 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-// Copyright © 2018 ceCosmos, Brazil. All rights reserved.
-// Project: ProtoStar
-// Author: Johni Michels
-
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
