@@ -17,4 +17,12 @@ jobs:
         uses: actions/checkout@v1
       - name: "Compile Source"
         run: dotnet build Source/ProtoStar.Collections.csproj
-    
+  TestCompilation:
+    name: "Source Compilation"
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/dotnet/core/sdk:3.1
+    steps:
+      - name: "Checkout Code"
+        uses: actions/checkout@v1
+      - name: "Compile Test"
+        run: dotnet build Test/ProtoStar.Collections.Test.csproj
